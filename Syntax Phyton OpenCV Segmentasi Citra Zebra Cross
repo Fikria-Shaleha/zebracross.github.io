@@ -1,0 +1,53 @@
+import cv2
+import numpy as np
+from google.colab.patches import cv2_imshow
+
+img=cv2.imread('jebla klos.jpg')
+print(img.shape)
+cv2_imshow(img)
+
+gray1=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+print(gray1.shape)
+cv2_imshow(gray1)
+
+# memanggil fungsi plt dari matplotlib
+from matplotlib import pyplot as plt
+
+# membuat sebuah variabel kosong 'fig'
+fig = plt.figure()
+fig.add_subplot(121)
+# subplot (jumlah baris, jumlah kolom, urutan)
+
+# menampilkan gambar dengan fungsi plt
+plt.imshow(img)
+
+# plotting gambar
+fig.add_subplot(122)
+# subplot, formatnya: (jumlah baris, jumlah kolom, urutan)
+img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+plt.imshow(img2)
+
+
+plt.show() #untuk menampilkan plot
+
+ret,thresh1=cv2.threshold(gray1,130,255,cv2.THRESH_BINARY)
+print(thresh1.shape)
+cv2_imshow(thresh1)
+
+ret,thresh1=cv2.threshold(gray1,150,275,cv2.THRESH_BINARY_INV)
+print(thresh1.shape)
+cv2_imshow(thresh1)
+
+# memanggil library yang dibutuhkan
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+# img = cv2.imread(‘jebla klos.jpg')
+
+color = ('b','g','r')
+for i,col in enumerate(color):
+  histr = cv2.calcHist([img],[i],None,[256],[0,256])
+  plt.plot(histr,color = col)
+  plt.xlim([0,256])
+plt.show()
